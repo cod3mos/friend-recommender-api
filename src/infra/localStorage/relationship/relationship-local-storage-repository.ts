@@ -13,14 +13,14 @@ export class RelationshipLocalStorageRepository
 {
     async createRelationship(params: AddRelationshipModel): Promise<void> {
         const users = Object.keys(params)
-        const fisrtRelationship = (cpf: string) =>
+        const firstRelationship = (cpf: string) =>
             listOfRelationships.map(item => item.person.cpf).includes(cpf)
 
         for (const user of users) {
             const person = await new PersonLocalStorageRepository().find(params[user])
             const friends = users.map(item => (item !== user ? params[item] : null)).filter(Boolean)
 
-            if (!fisrtRelationship(person.cpf)) {
+            if (!firstRelationship(person.cpf)) {
                 listOfRelationships.push({ person, friends: friends })
             } else {
                 const index = listOfRelationships.map(item => item.person.cpf).indexOf(person.cpf)
