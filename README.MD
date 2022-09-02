@@ -1,7 +1,20 @@
-
 # Recomendador de Amigos - API
 
 Sistema de sugestões de amigos baseado em amizades já existentes.
+
+
+## Stack utilizada
+
+**Back-end:** Node, Express
+
+
+## Documentação
+[Documentação](https://documenter.getpostman.com/view/18695442/VUxRPmXd)
+
+
+## Proposta do projeto
+
+[Enunciado](documents/recomendador-de-amigos-enunciado.pdf)
 
 
 ## Funcionalidades
@@ -46,17 +59,6 @@ Inicie o servidor
 ```
 
 
-## Stack utilizada
-
-**Back-end:** Node, Express
-
-
-## Proposta do projeto
-
-[Enunciado](documents/recomendador-de-amigos-enunciado.pdf)
-
-
 ## Licença
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
