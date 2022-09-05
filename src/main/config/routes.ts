@@ -1,5 +1,6 @@
 import { readdirSync } from 'fs'
 import { Router, Express } from 'express'
+import { not } from '../../presentation/helpers/functions/helper'
 
 export default (app: Express): void => {
     const routes = Router()
@@ -8,6 +9,6 @@ export default (app: Express): void => {
 
     // TODO: Implementado recuperação de rotas dinâmica.
     readdirSync(`${String(__dirname)}/../routes`).map(async file => {
-        if (!file.endsWith('.map')) (await import(`../routes/${file}`)).default(routes)
+        if (not(file.endsWith('.map'))) (await import(`../routes/${file}`)).default(routes)
     })
 }

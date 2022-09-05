@@ -3,6 +3,7 @@ import { CleanAllData } from '../../../domain/useCases/clean-all-data'
 import { CreatePerson, FindPerson } from '../../../domain/useCases/person'
 import { PersonNotFound } from '../../../domain/exceptions/person-not-found'
 import { PersonAlreadyExist } from '../../../domain/exceptions/person-already-exist'
+import { not } from '../../../presentation/helpers/functions/helper'
 
 let listOfPeople: PersonModel[] = []
 
@@ -20,7 +21,7 @@ export class PersonLocalStorageRepository implements CreatePerson, FindPerson, C
     async find(cpf: string): Promise<PersonModel> {
         const personModel = listOfPeople.find(item => item.cpf === cpf)
 
-        if (!personModel) throw new PersonNotFound()
+        if (not(personModel)) throw new PersonNotFound()
 
         return personModel
     }

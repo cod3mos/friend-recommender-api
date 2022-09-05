@@ -1,5 +1,5 @@
 import { CleanAllData } from '../../../domain/useCases/clean-all-data'
-import { first } from '../../../presentation/helpers/functions/helper'
+import { first, not } from '../../../presentation/helpers/functions/helper'
 import { RelationshipModel } from '../../../domain/models/relationship'
 import { PersonLocalStorageRepository } from '../person/person-local-storage-repository'
 import { ListRecommendations } from '../../../domain/useCases/relationship/recommendations'
@@ -13,14 +13,13 @@ export class RelationshipLocalStorageRepository
 {
     async createRelationship(params: AddRelationshipModel): Promise<void> {
         const users = Object.keys(params)
-        const firstRelationship = (cpf: string) =>
-            listOfRelationships.map(item => item.person.cpf).includes(cpf)
+        const firstRelationship = (cpf: string) => listOfRelationships.map(item => item.person.cpf).includes(cpf)
 
         for (const user of users) {
             const person = await new PersonLocalStorageRepository().find(params[user])
             const friends = users.map(item => (item !== user ? params[item] : null)).filter(Boolean)
 
-            if (!firstRelationship(person.cpf)) {
+            if (not(firstRelationship(person.cpf))) {
                 listOfRelationships.push({ person, friends: friends })
             } else {
                 const index = listOfRelationships.map(item => item.person.cpf).indexOf(person.cpf)
